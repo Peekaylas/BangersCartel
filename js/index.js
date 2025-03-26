@@ -73,3 +73,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         'Authorization': `Bearer ${accessToken}`,
                         'Content-Type': 'application/json'
                     },
+                    songList.appendChild(li);
+            });
+        } catch (error) {
+            console.error('Error fetching songs for Bangers Cartel:', error);
+            songList.innerHTML = '<li>Error loading your Cartel playlist. Please try again.</li>';
+        } finally {
+            hideLoading();
+        }
+    }
