@@ -172,3 +172,23 @@ form {
 .playlist-section.loading #song-list {
     display: none;
 }
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  .row a {
+    color: whitesmoke;
+  }
+  
+  .row a:hover {
+    color: #d406f0;
+    background-color: transparent;
+  }
+  
+  .socials {
+    display: inline-block;
+    fill: #d406f0;
+  }
+  

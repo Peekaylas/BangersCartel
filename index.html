@@ -1,38 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bangers Cartel</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-</head>
-<body>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+     />
+  </head>
+  <body>
     <header>
-        <h1>Bangers Cartel</h1>
-        <p>Curate your ultimate Afrobeat bangers!</p>
+      <h1>Bangers Cartel</h1>
+      <p>Curate your ultimate Afrobeat bangers!</p>
     </header>
     <main>
-        <section class="card add-song-section">
-            <h2>Add a Banger</h2>
-            <form id="song-form">
-                <div class="input-group">
-                    <label for="title">Song Title:</label>
-                    <input type="text" id="title" placeholder="e.g., Ye" required>
-                </div>
-                <div class="input-group">
-                    <label for="artist">Artist:</label>
-                    <input type="text" id="artist" placeholder="e.g., Burna Boy" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Add Banger</button>
-            </form>
-        </section>
-        <section class="card playlist-section">
-            <h2>Your Cartel Playlist</h2>
-            <div class="spinner"></div>
-            <ul id="song-list"></ul>
-        </section>
+      <section class="card add-song-section">
+        <h2>Add a Banger</h2>
+        <form id="song-form">
+          <div class="input-group">
+            <label for="title">Song Title:</label>
+            <input type="text" id="title" placeholder="e.g., Ye" required />
+          </div>
+          <div class="input-group">
+            <label for="artist">Artist:</label>
+            <input
+              type="text"
+              id="artist"
+              placeholder="e.g., Burna Boy"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Add Banger</button>
+        </form>
+      </section>
+      <section class="card playlist-section">
+        <h2>Your Cartel Playlist</h2>
+        <div class="spinner"></div>
+        <ul id="song-list"></ul>
+      </section>
     </main>
+    <footer>
+      <div class="row">
+        <div>
+          <a href="https://www.instagram.com/peekaylas/?hl=en#">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+        </div>
+        <div>
+          <a href="https://x.com/peekaylas">
+            <i class="fa-brands fa-x-twitter"></i>
+          </a>
+        </div>
+        <div>
+          <a href="https://discord.gg/8Yt8etSp">
+            <i class="fa-brands fa-discord"></i>
+          </a>
+        </div>
+        <div>
+          <a href="https://github.com/Peekaylas">
+            <i class="fa-brands fa-github"></i>
+          </a>
+        </div>
+        <div>
+          <a href="https://profile.playstation.com/peekaylas">
+            <i class="fa-brands fa-playstation"></i>
+          </a>
+        </div>
+      </div>
+    </footer>
     <script src="js/script.js"></script>
-</body>
+  </body>
 </html>
