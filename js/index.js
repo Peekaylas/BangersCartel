@@ -115,3 +115,25 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Error adding banger to your Cartel playlist. Please try again.');
         }
     });
+    songList.addEventListener('click', async (e) => {
+        if (e.target.classList.contains('delete-btn')) {
+            const trackUri = e.target.dataset.uri;
+            try {
+                const deleteResponse = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        tracks: [{ uri: trackUri }]
+                    })
+                });
+                if (!deleteResponse.ok) throw new Error('Failed to delete banger from Cartel');
+                getSongs();
+            } catch (error) {
+                console.error('Error deleting banger from Bangers Cartel:', error);
+                alert('Error deleting banger from your Cartel playlist. Please try again.');
+            }
+        }
+    });
