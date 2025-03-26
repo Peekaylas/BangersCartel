@@ -4,26 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bangers Cartel</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
         <h1>Bangers Cartel</h1>
-        <p>Curate your best bangers!</p>
+        <p>Curate your ultimate Afrobeat bangers!</p>
     </header>
     <main>
-        <section id="add-song">
+        <section class="card add-song-section">
             <h2>Add a Banger</h2>
             <form id="song-form">
-                <label for="title">Song Title:</label>
-                <input type="text" id="title" placeholder="e.g., Ye" required>
-                <label for="artist">Artist:</label>
-                <input type="text" id="artist" placeholder="e.g., Burna Boy" required>
-                <button type="submit">Add Banger</button>
+                <div class="input-group">
+                    <label for="title">Song Title:</label>
+                    <input type="text" id="title" placeholder="e.g., Ye" required>
+                </div>
+                <div class="input-group">
+                    <label for="artist">Artist:</label>
+                    <input type="text" id="artist" placeholder="e.g., Burna Boy" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Banger</button>
             </form>
         </section>
-        <section id="playlist">
+        <section class="card playlist-section">
             <h2>Your Cartel Playlist</h2>
+            <div class="spinner"></div>
             <ul id="song-list"></ul>
         </section>
     </main>
