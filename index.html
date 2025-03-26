@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Music Player</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+    <div class="player">
+        <div class="album-art" id="albumArt"></div>
+        <div class="song-info">
+            <div class="song-title" id="songTitle"></div>
+            <div class="song-artist" id="songArtist"></div>
+        </div>
+        <audio id="audio" src=""></audio>
+        <div class="controls">
+            <button id="prevBtn">Previous</button>
+            <button id="playBtn">Play</button>
+            <button id="nextBtn">Next</button>
+        </div>
+        <div class="seek-bar" id="seekBar">
+            <div class="fill" id="fill"></div>
+        </div>
+        <div class="time" id="time">0:00 / 0:00</div>
+    </div>
+    <script src="script/script.js"></script>
+</body>
+</html>
