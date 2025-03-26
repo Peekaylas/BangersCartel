@@ -137,3 +137,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
+    accessToken = getAccessToken();
+    if (accessToken) {
+        getSongs();
+    } else {
+        const authUrl = 'https://accounts.spotify.com/authorize?' + new URLSearchParams({
+            client_id: clientId,
+            response_type: 'token',
+            redirect_uri: redirectUri,
+            scope: 'playlist-modify-public playlist-modify-private playlist-read-private',
+            show_dialog: true
+        });
+        window.location = authUrl;
+    }
+});
