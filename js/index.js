@@ -52,3 +52,24 @@ document.addEventListener('DOMContentLoaded', () => {
             hideLoading();
         }
     }
+    songForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const title = document.getElementById('title').value;
+        const artist = document.getElementById('artist').value;
+
+        try {
+            const searchResponse = await fetch(
+                `https://api.spotify.com/v1/search?q=track:${title}+artist:${artist}+genre:afrobeat&type=track&limit=1`,
+                { headers: { 'Authorization': `Bearer ${accessToken}` } }
+            );
+            if (!searchResponse.ok) throw new Error('Failed to search for banger');
+            const searchData = await searchResponse.json();
+            const trackUri = searchData.tracks.items[0]?.uri;
+
+            if (trackUri) {
+                const addResponse = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`,
+                        'Content-Type': 'application/json'
+                    },
