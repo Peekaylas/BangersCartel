@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bangers Cartel</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Bangers Cartel</h1>
+        <p>Curate your best bangers!</p>
+    </header>
+    <main>
+        <section id="add-song">
+            <h2>Add a Banger</h2>
+            <form id="song-form">
+                <label for="title">Song Title:</label>
+                <input type="text" id="title" placeholder="e.g., Ye" required>
+                <label for="artist">Artist:</label>
+                <input type="text" id="artist" placeholder="e.g., Burna Boy" required>
+                <button type="submit">Add Banger</button>
+            </form>
+        </section>
+        <section id="playlist">
+            <h2>Your Cartel Playlist</h2>
+            <ul id="song-list"></ul>
+        </section>
+    </main>
+    <script src="js/script.js"></script>
+</body>
+</html>
