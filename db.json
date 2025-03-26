@@ -1,0 +1,58 @@
+{
+    "songs": [
+    {
+    "title": "Sicko Mode",
+    "artist": "Travis Scott",
+    "cover": "asset/Photo1.png",
+    "src": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+    },
+    {
+    "title": "Mask Off",
+    "artist": "Future",
+    "cover": "asset/Photo2.png",
+    "src": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+    },
+    {
+    "title": "Bank Account",
+    "artist": "21 Savage",
+    "cover": "asset/Photo3.png",
+    "src": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
+    },
+    {
+    "title": "Hot",
+    "artist": "Young Thug",
+    "cover": "asset/Photo4.png",
+    "src": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"
+    }
+    ],
+    "artists": [
+    {
+    "name": "Travis Scott",
+    "image": "asset/artist1.svg"
+    },
+    {
+    "name": "Future",
+    "image": "asset/artist2.svg"
+    },
+    {
+    "name": "21 Savage",
+    "image": "asset/artist3.svg"
+    },
+    {
+    "name": "Young Thug",
+    "image": "asset/artist4.svg"
+    }
+    ],
+    "friends": [
+    {
+    "name": "User1",
+    "image": "asset/friend1.svg",
+    "listening": "Listening to Travis Scott"
+    },
+    {
+    "name": "User2",
+    "image": "asset/friend1.svg",
+    "listening": "Listening to Future"
+    }
+    ]
+    }
