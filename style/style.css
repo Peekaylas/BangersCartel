@@ -78,3 +78,7 @@ input[type="text"] {
 form button {
     padding: 8px 15px;
 }
+
+#deleteBtn {
+    background: linear-gradient(to bottom, #e53e3e, #c53030);
+}

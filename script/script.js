@@ -1,10 +1,11 @@
 const audio = document.getElementById('audio');
 const playButton = document.getElementById('playButton');
-const prevBtn = document.getElementById('prevBtn');
+const pauseButton = document.getElementById('pauseButton');
 const albumArt = document.getElementById('albumArt');
 const songTitle = document.getElementById('songTitle');
 const songArtist = document.getElementById('songArtist');
 const addSongForm = document.getElementById('addSongForm');
+const deleteBtn = document.getElementById('deleteBtn');
 
 let playlist = [];
 let currentSong = 0;
@@ -42,9 +43,8 @@ function playSong() {
     audio.play();
 }
 
-function updateSong() {
-    playlist[currentSong].musicName = "Updated Song " + (currentSong + 1);
-    loadSong(currentSong);
+function pauseSong() {
+    audio.pause();
 }
 
 function addCustomSong(event) {
@@ -65,12 +65,25 @@ function addCustomSong(event) {
     }
 }
 
+function deleteLastSong() {
+    if (playlist.length > 0) {
+        playlist.pop();
+        if (currentSong >= playlist.length) {
+            currentSong = playlist.length - 1;
+        }
+        if (playlist.length > 0) {
+            loadSong(currentSong);
+        } else {
+            audio.src = '';
+            songTitle.textContent = '';
+            songArtist.textContent = '';
+            albumArt.style.backgroundImage = '';
+        }
+    }
+}
+
 playButton.addEventListener('click', playSong);
-prevBtn.addEventListener('click', function() {
-    currentSong = (currentSong - 1 + playlist.length) % playlist.length;
-    updateSong();
-    playSong();
-});
+pauseButton.addEventListener('click', pauseSong);
 addSongForm.addEventListener('submit', addCustomSong);
 
 fetchPlaylist();
