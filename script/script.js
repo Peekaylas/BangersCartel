@@ -8,6 +8,14 @@ const time = document.getElementById('time');
 const albumArt = document.getElementById('albumArt');
 const songTitle = document.getElementById('songTitle');
 const songArtist = document.getElementById('songArtist');
+const addSongForm = document.getElementById('addSongForm');
+const songNameInput = document.getElementById('songName');
+const songImageInput = document.getElementById('songImage');
+const songLinkInput = document.getElementById('songLink');
+const toggleThemeBtn = document.getElementById('toggleTheme');
+const playlistContainer = document.getElementById('playlistContainer');
+const clickSound = document.getElementById('clickSound');
+const submitSound = document.getElementById('submitSound');
 
 let playlist = [];
 let currentSong = 0;
@@ -25,12 +33,7 @@ function fetchPlaylist() {
     })
     .then(function(data) {
         playlist = data;
-        playlist.push({
-            "artist": "Test Artist",
-            "musicName": "Test Song",
-            "audioSrc": "test_song.mp3",
-            "albumCover": "images/albums/test.jpg"
-        });
+        updatePlaylistUI();
         loadSong(currentSong);
     })
     .catch(function(error) {
@@ -51,9 +54,11 @@ function playPause() {
     if (audio.paused) {
         audio.play();
         playBtn.textContent = "Pause";
+        clickSound.play();
     } else {
         audio.pause();
         playBtn.textContent = "Play";
+        clickSound.play();
     }
 }
 
@@ -74,14 +79,58 @@ function formatTime(seconds) {
 function updateSong() {
     playlist[currentSong].musicName = "Updated Song " + (currentSong + 1);
     loadSong(currentSong);
+    updatePlaylistUI();
+}
+
+function addCustomSong(event) {
+    event.preventDefault();
+    const newSongName = songNameInput.value.trim();
+    const newSongImage = songImageInput.value.trim();
+    const newSongLink = songLinkInput.value.trim();
+    if (newSongName && newSongImage && newSongLink) {
+        playlist.push({
+            "artist": "User Added",
+            "musicName": newSongName,
+            "audioSrc": newSongLink,
+            "albumCover": newSongImage
+        });
+        songNameInput.value = '';
+        songImageInput.value = '';
+        songLinkInput.value = '';
+        updatePlaylistUI();
+        submitSound.play();
+    }
+}
+
+function toggleTheme() {
+    document.body.classList.toggle('dark');
+    clickSound.play();
+}
+
+function updatePlaylistUI() {
+    playlistContainer.innerHTML = '';
+    for (let i = 0; i < playlist.length; i++) {
+        const item = document.createElement('div');
+        item.className = 'playlist-item';
+        item.textContent = playlist[i].musicName + ' - ' + playlist[i].artist;
+        item.onclick = function() {
+            currentSong = i;
+            loadSong(currentSong);
+            playPause();
+        };
+        playlistContainer.appendChild(item);
+    }
 }
 
 playBtn.addEventListener('click', playPause);
-nextBtn.addEventListener('click', function() {
-    currentSong = (currentSong + 1) % playlist.length;
+prevBtn.addEventListener('click', function() {
+    currentSong = (currentSong - 1 + playlist.length) % playlist.length;
     updateSong();
     playPause();
+    clickSound.play();
 });
 audio.addEventListener('timeupdate', updateSeekBar);
+addSongForm.addEventListener('submit', addCustomSong);
+toggleThemeBtn.addEventListener('click', toggleTheme);
 
 fetchPlaylist();
