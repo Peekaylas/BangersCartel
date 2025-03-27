@@ -10,12 +10,64 @@ const playlistContainer = document.getElementById('playlistContainer');
 
 let playlist = [];
 let currentSong = 0;
-const defaultAudioSrc = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
+const apiUrl = 'https://musicbrainz.org/ws/2/recording?query=love&fmt=json';
+const defaultAudioSources = [
+    'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+    'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
+    'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
+    'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3',
+    'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3',
+    'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3',
+    'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3',
+    'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3',
+    'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3',
+    'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3'
+];
 const defaultAlbumCover = 'https://via.placeholder.com/150';
 
 function fetchPlaylist() {
-    console.log('API is unreachable. Using fallback data.');
-    useFallbackData();
+    fetch(apiUrl, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'User-Agent': 'MusicPlayer/1.0'
+        },
+        mode: 'cors'
+    })
+    .then(function(response) {
+        if (!response.ok) {
+            throw new Error('API request failed with status ' + response.status);
+        }
+        return response.json();
+    })
+    .then(function(data) {
+        console.log('API Response:', data);
+        if (data && data.recordings && Array.isArray(data.recordings)) {
+            playlist = data.recordings.map(function(item, index) {
+                return {
+                    id: item.id,
+                    artist: item['artist-credit'] && item['artist-credit'][0] && item['artist-credit'][0].name ? item['artist-credit'][0].name : 'Unknown Artist',
+                    musicName: item.title,
+                    audioSrc: defaultAudioSources[index % defaultAudioSources.length],
+                    albumCover: defaultAlbumCover
+                };
+            });
+        } else {
+            throw new Error('Invalid API response format');
+        }
+        if (playlist.length > 0) {
+            loadSong(currentSong);
+            updatePlaylistUI();
+        } else {
+            console.log('No songs found in API response. Using fallback data.');
+            useFallbackData();
+        }
+    })
+    .catch(function(error) {
+        console.error('Error fetching songs:', error.message);
+        console.log('Falling back to sample data.');
+        useFallbackData();
+    });
 }
 
 function useFallbackData() {
@@ -24,14 +76,14 @@ function useFallbackData() {
             id: 1,
             artist: "Sample Artist",
             musicName: "Sample Song",
-            audioSrc: defaultAudioSrc,
+            audioSrc: defaultAudioSources[0],
             albumCover: defaultAlbumCover
         },
         {
             id: 2,
             artist: "Another Artist",
             musicName: "Another Song",
-            audioSrc: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
+            audioSrc: defaultAudioSources[1],
             albumCover: defaultAlbumCover
         }
     ];
@@ -81,7 +133,7 @@ function addCustomSong(event) {
             id: Date.now(),
             artist: 'User Added',
             musicName: newSongName,
-            audioSrc: defaultAudioSrc,
+            audioSrc: defaultAudioSources[playlist.length % defaultAudioSources.length],
             albumCover: defaultAlbumCover
         };
         playlist.push(newSong);
