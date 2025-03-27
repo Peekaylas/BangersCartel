@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
-    <div class="background-overlay"></div>
     <div class="player">
         <div class="album-art" id="albumArt"></div>
         <div class="song-info">
@@ -15,25 +14,18 @@
             <div class="song-artist" id="songArtist"></div>
         </div>
         <audio id="audio" src=""></audio>
-        <audio id="clickSound" src="click.mp3"></audio>
-        <audio id="submitSound" src="submit.mp3"></audio>
         <div class="controls">
             <button id="prevBtn">Previous</button>
-            <button id="playBtn">Play</button>
-            <button id="nextBtn">Next</button>
+            <button id="playButton">Play</button>
+            <button id="pauseButton">Pause</button>
         </div>
-        <div class="seek-bar" id="seekBar">
-            <div class="fill" id="fill"></div>
-        </div>
-        <div class="time" id="time">0:00 / 0:00</div>
         <form id="addSongForm">
             <input type="text" id="songName" placeholder="Song Name">
             <input type="text" id="songImage" placeholder="Image URL">
             <input type="text" id="songLink" placeholder="Audio URL">
             <button type="submit">Add Song</button>
+            <button type="button" id="deleteBtn">Delete Last Song</button>
         </form>
-        <button id="toggleTheme">Toggle Theme</button>
-        <div class="playlist" id="playlistContainer"></div>
     </div>
     <script src="script/script.js"></script>
 </body>
