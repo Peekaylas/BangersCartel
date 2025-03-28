@@ -1,11 +1,26 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    background-color: #2a5298; 
+}
+
+.header {
+    width: 100%;
+    background-color: #ff4b2b; 
+    padding: 15px 0;
+    text-align: center;
+    border-bottom: 3px solid #333; 
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 32px; 
+    color: white;
+    font-weight: bold;
 }
 
 .player {
@@ -15,6 +30,7 @@ body {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     width: 320px;
     text-align: center;
+    margin: 20px 0;
 }
 
 .album-art {

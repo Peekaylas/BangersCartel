@@ -1,6 +1,7 @@
 const audio = document.getElementById('audio');
 const playButton = document.getElementById('playButton');
 const pauseButton = document.getElementById('pauseButton');
+const prevButton = document.getElementById('prevBtn');
 const albumArt = document.getElementById('albumArt');
 const songTitle = document.getElementById('songTitle');
 const songArtist = document.getElementById('songArtist');
@@ -23,7 +24,15 @@ const defaultAudioSources = [
     'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3',
     'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3'
 ];
-const defaultAlbumCover = 'https://via.placeholder.com/150';
+
+const albumCovers = [
+    'images/avenged_sevenfold.jpg',
+    'images/chvrches.jpg',
+    'images/coldplay.jpg',
+    'images/eminem.jpg',
+    'images/hollywood_undead.jpg',
+    'images/odesza.jpg'
+];
 
 function fetchPlaylist() {
     fetch(apiUrl, {
@@ -49,7 +58,7 @@ function fetchPlaylist() {
                     artist: item['artist-credit'] && item['artist-credit'][0] && item['artist-credit'][0].name ? item['artist-credit'][0].name : 'Unknown Artist',
                     musicName: item.title,
                     audioSrc: defaultAudioSources[index % defaultAudioSources.length],
-                    albumCover: defaultAlbumCover
+                    albumCover: albumCovers[index % albumCovers.length]
                 };
             });
         } else {
@@ -77,14 +86,14 @@ function useFallbackData() {
             artist: "Sample Artist",
             musicName: "Sample Song",
             audioSrc: defaultAudioSources[0],
-            albumCover: defaultAlbumCover
+            albumCover: albumCovers[0]
         },
         {
             id: 2,
             artist: "Another Artist",
             musicName: "Another Song",
             audioSrc: defaultAudioSources[1],
-            albumCover: defaultAlbumCover
+            albumCover: albumCovers[1]
         }
     ];
     if (playlist.length > 0) {
@@ -106,7 +115,7 @@ function loadSong(index) {
     audio.src = song.audioSrc;
     songTitle.textContent = song.musicName;
     songArtist.textContent = song.artist;
-    albumArt.style.backgroundImage = 'url(' + song.albumCover + ')';
+    albumArt.style.backgroundImage = `url(${song.albumCover})`;
     audio.load();
     console.log('Loaded song:', song);
 }
@@ -125,6 +134,13 @@ function pauseSong() {
     audio.pause();
 }
 
+function prevSong() {
+    if (playlist.length === 0) return;
+    currentSong = (currentSong - 1 + playlist.length) % playlist.length;
+    loadSong(currentSong);
+    playSong();
+}
+
 function addCustomSong(event) {
     event.preventDefault();
     const newSongName = document.getElementById('songName').value.trim();
@@ -134,7 +150,7 @@ function addCustomSong(event) {
             artist: 'User Added',
             musicName: newSongName,
             audioSrc: defaultAudioSources[playlist.length % defaultAudioSources.length],
-            albumCover: defaultAlbumCover
+            albumCover: albumCovers[playlist.length % albumCovers.length]
         };
         playlist.push(newSong);
         document.getElementById('songName').value = '';
@@ -150,11 +166,13 @@ function deleteLastSong() {
         }
         if (playlist.length > 0) {
             loadSong(currentSong);
+            playSong();
         } else {
             audio.src = '';
-            songTitle.textContent = '';
+            songTitle.textContent = 'No Songs';
             songArtist.textContent = '';
             albumArt.style.backgroundImage = '';
+            audio.pause();
         }
         updatePlaylistUI();
     }
@@ -165,7 +183,7 @@ function updatePlaylistUI() {
     for (let i = 0; i < playlist.length; i++) {
         const item = document.createElement('div');
         item.className = 'playlist-item';
-        item.textContent = playlist[i].musicName + ' - ' + playlist[i].artist;
+        item.textContent = `${playlist[i].musicName} - ${playlist[i].artist}`;
         item.onclick = function() {
             currentSong = i;
             loadSong(currentSong);
@@ -177,6 +195,8 @@ function updatePlaylistUI() {
 
 playButton.addEventListener('click', playSong);
 pauseButton.addEventListener('click', pauseSong);
+prevButton.addEventListener('click', prevSong);
 addSongForm.addEventListener('submit', addCustomSong);
+deleteBtn.addEventListener('click', deleteLastSong);
 
 fetchPlaylist();
